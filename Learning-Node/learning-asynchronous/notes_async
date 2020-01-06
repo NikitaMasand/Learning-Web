@@ -1,0 +1,6 @@
+Synchronous/Blocking:
+until the first task is completed, the second one has to wait to be processed. 
+
+Asynchronous/Non-Blocking:
+setTimeout func (function, wait time) is an example of Asynchronous or non Blocking function.
+it executes the function after wait time in ms. 

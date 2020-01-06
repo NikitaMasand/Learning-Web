@@ -1,0 +1,8 @@
+transaction : a group of operations that should be performed as a unit
+either these operations are completed and changes are applied in the database
+or one of them fail and they rollback to initial state.
+
+transactions are in sql or relational database
+in mongo : 2 phase commit
+
+fawn

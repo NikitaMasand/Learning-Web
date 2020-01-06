@@ -1,0 +1,96 @@
+1. Middleware
+2. Configuration
+3. Debugging
+4. Templating Engines
+
+1. Middleware:
+It's basically a function that takes in a request object and either sends a response or passes
+it on to another Middleware function
+
+In express, every route handler function is a middleware function..they 
+terminate the request response cycle as in our previous example
+
+Request Processing Pipeline:
+Request -> Middleware func 1 -> ... -> Middleware func n -> Response 
+
+creating a custom middleware function we pass next as a parameter to show this needs to call another
+func in the request response cycle i.e next(), if we don't do this, response is not displayed and
+our request keeps hanging
+Middleware funcs are called in sequence
+https://stackoverflow.com/questions/7337572/what-does-middleware-and-app-use-actually-mean-in-expressjs
+
+
+For parsers:
+src: https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded/51844327
+What is Middleware? 
+It is those methods/functions/operations that are called BETWEEN processing the Request 
+and sending the Response in your application method.
+
+When talking about express.json() and express.urlencoded() think specifically about POST requests
+(i.e. the .post request object) and PUT Requests (i.e. the .put request object)
+
+You DO NOT NEED express.json() and express.urlencoded() for GET Requests or DELETE Requests.
+
+You NEED express.json() and express.urlencoded() for POST and PUT requests, because in both these 
+requests you are sending data (in the form of some data object) to the server and you are asking
+the server to accept or store that data (object), which is enclosed in the body (i.e. req.body) 
+of that (POST or PUT) Request
+
+Express provides you with middleware to deal with the (incoming) data (object)
+in the body of the request.
+
+a. express.json() is a method inbuilt in express to recognize the incoming Request Object as a 
+JSON Object. This method is called as a middleware in your application using the code:
+app.use(express.json());
+b. express.urlencoded() is a method inbuilt in express to recognize the incoming Request Object
+as strings or arrays. This method is called as a middleware in your application using the code:
+app.use(express.urlencoded());
+
+2. Configuration
+depending on the environment, we can configure settings. eg: different db for development env, diff
+for production and so on. how to store config settings for each env and how to override them?
+
+used the config package.
+npm i config (could also use rc)
+
+made a config folder
+-default.json
+-development.json
+-production.json
+
+config.get('name') would give me the name property depending on which environment I am in. we can set
+the env using set NODE_ENV 
+
+Also, we should not store passwords in the repositories. thus we stored them in environment variables. 
+and to map environment variables with configuration settings, we map them in 
+custom-environment-variables.json file. file's name is imp. set appName_password = "abcd"
+
+3. Debugging
+console.log is used for debugging. we need to remove them in production and again write them when needed
+thus we use debug package. replace console.log statements with debug function, can enable or 
+disable also depending on environment. can also set the level of Debugging needed
+
+const startupDebugger = require('debug')('app:startup')...this is the namespace...
+
+we use an environment variable to determine what kind of information do we need to 
+be displayed on the console
+to see the Debugging messages in the namespaces
+set DEBUG=app:startup,app:db or app:* (wildcard for displaying messages in all the namespaces)
+colour codes for different namespaces....
+
+
+4. Templating Engines:
+generating dynamic pages/html to return to client
+
+PUG
+MUSTACHE
+EJS 
+
+Structuring application:
+https://stackoverflow.com/questions/28305120/differences-between-express-router-and-app-get/33721337
+https://stackoverflow.com/questions/27227650/difference-between-app-use-and-router-use-in-express
+
+
+
+
+

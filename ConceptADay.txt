@@ -1,0 +1,14 @@
+1. 
+5th jan
+What type of HTTP request is login and logout?
+with login we are not creating a new resource, not updating or deleting any of that.
+None of the CRUD operations.
+
+The way we address this is as a request or command
+we create a new login request/command
+/api/logins
+
+maybe store all the logins of applications in a separate collection in mongodb. 
+treating it as login resource and use post to create it.
+
+
